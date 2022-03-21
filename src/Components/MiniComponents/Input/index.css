@@ -12,6 +12,8 @@
   line-height: 30px;
 
   transition: 0.2s border;
+
+  width: 100%;
 }
 
 .input:hover {
