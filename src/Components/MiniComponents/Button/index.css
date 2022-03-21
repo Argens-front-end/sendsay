@@ -88,3 +88,15 @@ img.button__loaded {
 .button__primary:disabled {
   background-color: #c4c4c4;
 }
+
+.button__primary_loading:hover {
+  background-color: #0055fb;
+}
+
+.button__primary_loading:active {
+  background-color: #0055fb;
+}
+
+.button__primary_loading:disabled {
+  background-color: #0055fb;
+}

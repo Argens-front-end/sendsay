@@ -1,10 +1,26 @@
-import React from "react";
-import { InputGroup } from "./Components/MiniComponents/InputGroup";
+import React, { useEffect } from "react";
+import { Login } from "./Components/Login";
+import { useAppDispatch, useAppSelector } from "./Hooks/reduxHooks";
 
 function App() {
+  const { loadingAuth, isAuth } = useAppSelector((state) => state.App);
+
+  const { chechAuth } = useAppDispatch();
+
+  useEffect(() => {
+    chechAuth();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div className="App">
-      <InputGroup label="Asdaa" labelOptional="asdwwwasdas" error />
+      {loadingAuth ? (
+        <div>Loading</div>
+      ) : isAuth ? (
+        <div>Main Contant</div>
+      ) : (
+        <Login />
+      )}
     </div>
   );
 }

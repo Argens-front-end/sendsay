@@ -3,15 +3,16 @@ import "./index.css";
 
 import classNames from "classnames";
 
-interface ButtonProps {
+interface ButtonProps
+  extends React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    HTMLButtonElement
+  > {
   text?: string;
-  children?: React.ReactNode;
   variant?: "none" | "primary";
   large?: "mini" | "normal";
   className?: string;
-  disabled?: boolean;
   loading?: boolean;
-  onClick?: () => void;
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -22,15 +23,25 @@ export const Button: React.FC<ButtonProps> = ({
   className = "",
   disabled,
   loading,
+  onClick,
 }) => {
   const classButton = {
     button__mini: large === "mini",
     button__primary: variant === "primary",
+    button__primary_loading: loading,
     [className]: className,
   };
 
+  const onClickButton: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    if (!loading && onClick) onClick(e);
+  };
+
   return (
-    <button className={classNames("button", classButton)} disabled={disabled}>
+    <button
+      className={classNames("button", classButton)}
+      disabled={disabled || loading}
+      onClick={onClickButton}
+    >
       {loading ? (
         <img alt="loading" src="/icons/loader.svg" className="button__loaded" />
       ) : (
