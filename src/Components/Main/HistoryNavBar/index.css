@@ -1,0 +1,25 @@
+.history-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding-right: 15px;
+  height: 50px;
+}
+
+.history-nav-bar__list {
+  padding-left: 15px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+}
+
+.history-nav-bar__list::-webkit-scrollbar {
+  display: none;
+}
+
+.history-nav-bar__close {
+  background-color: transparent;
+}
