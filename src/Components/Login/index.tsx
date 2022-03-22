@@ -8,7 +8,7 @@ import "./index.css";
 import { IErrorResLogin, ILoginData, initialLoginData } from "./types";
 
 export const Login: React.FC = () => {
-  const { chechAuth } = useAppDispatch();
+  const { checkAuth } = useAppDispatch();
 
   const [loginData, setLoginsData] = useState<ILoginData>(initialLoginData);
   const [loading, setLoading] = useState(false);
@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
       .login(loginData)
       .then(() => {
         document.cookie = "sendsay_session=" + sendsay.session;
-        chechAuth();
+        checkAuth();
       })
       .catch((res: IErrorResLogin) => {
         setErrorRes(res);
