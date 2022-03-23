@@ -1,3 +1,4 @@
+import { HISTORY_ITEMS } from "../../Constants";
 import { ConsoleAction, ConsoleActionTypes, IConsoleState } from "./types";
 
 const initialConsoleState: IConsoleState = {
@@ -21,6 +22,12 @@ export default function ConsoleReducer(
       };
 
     case ConsoleActionTypes.CONSOLE_ADD_RESPONSE:
+      let historyFilter = state.historyRequests.filter(
+        (historyItem) => historyItem.name !== action.payload.name
+      );
+      historyFilter.unshift(action.payload);
+      historyFilter = historyFilter.slice(0, 20);
+      localStorage.setItem(HISTORY_ITEMS, JSON.stringify(historyFilter));
       return {
         ...state,
         activeRequest: {
@@ -28,8 +35,15 @@ export default function ConsoleReducer(
           resJson: JSON.stringify(action.payload.res, undefined, 2),
           status: action.payload.status,
         },
-        historyRequests: [action.payload, ...state.historyRequests],
+        historyRequests: historyFilter,
       };
+
+    case ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ:
+      localStorage.removeItem(HISTORY_ITEMS);
+      return { ...state, historyRequests: [] };
+
+    case ConsoleActionTypes.CONSOLE_INITIAL_HISTORY_REQ:
+      return { ...state, historyRequests: action.payload };
 
     default:
       return state;

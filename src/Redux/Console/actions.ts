@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import sendsay from "../../Helpers/sendsay";
-import { ConsoleAction, ConsoleActionTypes } from "./types";
+import { ConsoleAction, ConsoleActionTypes, IHistoryResponse } from "./types";
 
 export const onChangeConsoleReq = (value: string): ConsoleAction => ({
   type: ConsoleActionTypes.CONSOLE_ON_CHANGE_REQ,
@@ -43,3 +43,14 @@ export const submitRequest =
       setLoading(false);
     }
   };
+
+export const initHistoryResponse = (
+  historyRes: IHistoryResponse[]
+): ConsoleAction => ({
+  type: ConsoleActionTypes.CONSOLE_INITIAL_HISTORY_REQ,
+  payload: historyRes,
+});
+
+export const clearHistoryResponse = (): ConsoleAction => ({
+  type: ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ,
+});

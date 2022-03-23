@@ -1,7 +1,12 @@
 import classNames from "classnames";
-import { FC, useCallback, useState } from "react";
+import { FC, useCallback, useMemo, useState } from "react";
+import { CONSOLE_SIZE } from "../../../Constants";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 import { Button } from "../../MiniComponents/Button";
+import { ConsoleTextarea } from "./ConsoleTextarea";
+
+import dragElement from "./drag-element.svg";
+
 import "./index.css";
 
 export const Console: FC = () => {
@@ -10,7 +15,20 @@ export const Console: FC = () => {
   const [errorReqJson, setErrorReqJson] = useState(false);
   const [loadingBtn, setLoadingBtn] = useState(false);
 
-  const { reqJSON, resJson } = useAppSelector(
+  const initialConsoleSize = useMemo(() => {
+    const initialSize = localStorage.getItem(CONSOLE_SIZE);
+    if (initialSize) {
+      return +initialSize;
+    } else {
+      return 50;
+    }
+  }, []);
+
+  const [leftTextareaWidth, setLeftTxextAreaWidth] =
+    useState(initialConsoleSize);
+  const [mouseDownResize, setMouseDownResize] = useState(false);
+
+  const { reqJSON, resJson, status } = useAppSelector(
     (state) => state.Console.activeRequest
   );
 
@@ -50,20 +68,49 @@ export const Console: FC = () => {
     setLoadingBtn(false);
   };
 
+  const onMouseMove = function (e: MouseEvent) {
+    const windowInnerWidth = document.documentElement.clientWidth;
+    const leftWidth = (e.pageX / windowInnerWidth) * 100;
+
+    localStorage.setItem(CONSOLE_SIZE, leftWidth.toString());
+    setLeftTxextAreaWidth(leftWidth);
+  };
+
+  const onMouseUp = function (e: MouseEvent) {
+    setMouseDownResize(false);
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  };
+
+  const onMouseDownResize: React.MouseEventHandler<HTMLDivElement> = (e) => {
+    setMouseDownResize(true);
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  };
+
   return (
-    <div className="console">
+    <div
+      className={classNames("console", { console__resize: mouseDownResize })}
+    >
       <div className="console__main">
-        <div
-          className={classNames("console__item", {
-            console__item_error: errorReqJson,
-          })}
-        >
-          <textarea onChange={onChangeReq} value={reqJSON} />
+        <ConsoleTextarea
+          value={reqJSON}
+          onChange={onChangeReq}
+          error={errorReqJson}
+          label="Запрос:"
+          disabled={loadingBtn}
+          width={leftTextareaWidth}
+        />
+        <div className="console__drag" onMouseDown={onMouseDownResize}>
+          <img src={dragElement} alt="drag" />
         </div>
-        <div className="console__drag">:</div>
-        <div className="console__item">
-          <textarea disabled value={resJson}></textarea>
-        </div>
+        <ConsoleTextarea
+          value={resJson}
+          disabled
+          error={!status}
+          label="Ответ:"
+          width={100 - leftTextareaWidth}
+        />
       </div>
       <div className="console__bottom">
         <div>
@@ -76,7 +123,7 @@ export const Console: FC = () => {
             Отправить
           </Button>
         </div>
-        <div style={{ textAlign: "center" }}>Link</div>
+        <div className="console__bottom_link">Link</div>
         <div className="console__bottom_formating">
           <Button onClick={onClickFormating}>
             <img src="/icons/align-right.svg" alt="icon-formationg" />

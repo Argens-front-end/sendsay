@@ -7,6 +7,14 @@
   flex-direction: column;
 }
 
+.console__resize {
+  cursor: col-resize;
+}
+
+.console__resize textarea {
+  cursor: col-resize;
+}
+
 .console__main {
   height: calc(100% - 70px);
   padding: 10px 15px 15px;
@@ -15,33 +23,13 @@
   justify-content: space-between;
 }
 
-.console__item {
-  width: calc(50% - 5px);
-  height: 100%;
-}
-
-.console__item textarea {
-  width: 100%;
-  height: 100%;
-  resize: none;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.console__item textarea:focus {
-  outline: none;
-}
-
-.console__item_error textarea {
-  border: 1px solid #cf2c00;
-  box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
-}
-
 .console__drag {
   cursor: col-resize;
   width: 10px;
-  text-align: center;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .console__bottom {
@@ -63,6 +51,10 @@
 .console__bottom_formating {
   display: flex;
   justify-content: flex-end;
+}
+
+.console__bottom_link {
+  text-align: center;
 }
 
 .console__bottom_formating button {

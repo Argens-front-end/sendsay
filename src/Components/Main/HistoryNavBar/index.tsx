@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { useAppSelector } from "../../../Hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 
 import { Button } from "../../MiniComponents/Button";
 import { HistoryItem } from "./HistoryItem";
@@ -10,6 +10,12 @@ export const HistoryNavBar: FC = () => {
   const historyRequests = useAppSelector(
     (state) => state.Console.historyRequests
   );
+
+  const { clearHistoryResponse } = useAppDispatch();
+
+  const onClickClearHistory = () => {
+    clearHistoryResponse();
+  };
 
   return (
     <div className="history-nav-bar">
@@ -23,7 +29,10 @@ export const HistoryNavBar: FC = () => {
         ))}
       </div>
       <div>
-        <Button className="history-nav-bar__close">
+        <Button
+          className="history-nav-bar__close"
+          onClick={onClickClearHistory}
+        >
           <img src="/icons/close.svg" alt="clear-history" />
         </Button>
       </div>
