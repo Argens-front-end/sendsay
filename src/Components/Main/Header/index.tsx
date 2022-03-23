@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useFullScreen } from "../../../Hooks";
 import { useAppSelector } from "../../../Hooks/reduxHooks";
 import { Button } from "../../MiniComponents/Button";
+import { Icons } from "../../MiniComponents/Icons";
 
 import "./index.css";
 
@@ -21,7 +22,7 @@ export const Header: FC = () => {
   return (
     <header className="header">
       <div className="header__logo">
-        <img alt="logo" src="/icons/logo.svg" />
+        <Icons icon="Logo" />
         <span>API-консолька</span>
       </div>
 
@@ -33,15 +34,15 @@ export const Header: FC = () => {
         </div>
         <div className="header_logout-btn">
           <Button>
-            Выйти <img src="/icons/log-out.svg" alt="log-out" />
+            Выйти <Icons icon="LogOut" />
           </Button>
         </div>
         <div className="header__full-screen-btn">
           <Button onClick={onClickOpenCloseFullScreen}>
             {!fullscreen ? (
-              <img src="/icons/maximize.svg" alt="maximize" />
+              <Icons icon="Maximize" />
             ) : (
-              <img src="/icons/smallsize.svg" alt="smallsize" />
+              <Icons icon="SmallSize" />
             )}
           </Button>
         </div>

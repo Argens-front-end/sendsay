@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import sendsay from "../../Helpers/sendsay";
 import { useAppDispatch } from "../../Hooks/reduxHooks";
 import { Button } from "../MiniComponents/Button";
+import { Icons } from "../MiniComponents/Icons";
 import { InputGroup } from "../MiniComponents/InputGroup";
 
 import "./index.css";
@@ -69,7 +70,7 @@ export const Login: React.FC = () => {
     <div className="login">
       <div>
         <div className="login__logo">
-          <img src="/icons/logo.svg" alt="logo" />
+          <Icons icon="Logo" />
         </div>
         <div className="login__form">
           <h2 className="login__title">API-консолька</h2>

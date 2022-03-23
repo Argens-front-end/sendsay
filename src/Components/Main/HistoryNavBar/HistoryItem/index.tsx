@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Icons } from "../../../MiniComponents/Icons";
 
 import "./index.css";
 
@@ -11,9 +12,9 @@ export const HistoryItem: FC<HistoryItemProps> = ({ status, name }) => {
   return (
     <div className="history-nav-bar__item">
       {status ? (
-        <img src="/icons/ellipseSuccess.svg" alt="success" />
+        <Icons icon="EllipseSuccess" alt="success" />
       ) : (
-        <img src="/icons/ellipseError.svg" alt="error" />
+        <Icons icon="EllipseError" alt="error" />
       )}
       {name}
     </div>

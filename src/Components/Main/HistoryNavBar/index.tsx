@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 
 import { Button } from "../../MiniComponents/Button";
+import { Icons } from "../../MiniComponents/Icons";
 import { HistoryItem } from "./HistoryItem";
 
 import "./index.css";
@@ -33,7 +34,7 @@ export const HistoryNavBar: FC = () => {
           className="history-nav-bar__close"
           onClick={onClickClearHistory}
         >
-          <img src="/icons/close.svg" alt="clear-history" />
+          <Icons icon="Close" />
         </Button>
       </div>
     </div>

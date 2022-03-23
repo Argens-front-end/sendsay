@@ -3,9 +3,8 @@ import { FC, useCallback, useMemo, useState } from "react";
 import { CONSOLE_SIZE } from "../../../Constants";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 import { Button } from "../../MiniComponents/Button";
+import { Icons } from "../../MiniComponents/Icons";
 import { ConsoleTextarea } from "./ConsoleTextarea";
-
-import dragElement from "./drag-element.svg";
 
 import "./index.css";
 
@@ -102,7 +101,7 @@ export const Console: FC = () => {
           width={leftTextareaWidth}
         />
         <div className="console__drag" onMouseDown={onMouseDownResize}>
-          <img src={dragElement} alt="drag" />
+          <Icons icon="DragElement" alt="drag" />
         </div>
         <ConsoleTextarea
           value={resJson}
@@ -126,7 +125,7 @@ export const Console: FC = () => {
         <div className="console__bottom_link">Link</div>
         <div className="console__bottom_formating">
           <Button onClick={onClickFormating}>
-            <img src="/icons/align-right.svg" alt="icon-formationg" />
+            <Icons icon="AlignRight" alt="icon-formationg" />
             Форматировать
           </Button>
         </div>
