@@ -1,0 +1,13 @@
+.link {
+  font-size: 16px;
+  line-height: 20px;
+
+  text-align: center;
+
+  color: #999999;
+}
+
+.link:hover {
+  text-decoration: none;
+  color: #999999;
+}

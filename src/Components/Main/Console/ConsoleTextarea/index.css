@@ -1,0 +1,43 @@
+.console__item {
+  width: calc(50% - 5px);
+  height: 100%;
+}
+
+.console__item textarea {
+  width: 100%;
+  height: calc(100% - 25px);
+  resize: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  font-size: 14px;
+  line-height: 18px;
+  color: #0d0d0d;
+}
+
+.console__item textarea:focus {
+  outline: none;
+}
+
+.console__item textarea:disabled {
+  background-color: #fff;
+}
+
+.console__item label {
+  font-size: 14px;
+  line-height: 20px;
+  padding-bottom: 5px;
+  display: block;
+  color: #999999;
+}
+
+.console__item_error textarea {
+  border: 1px solid #cf2c00;
+  box-shadow: 0px 0px 5px rgba(207, 44, 0, 0.5);
+}
+
+.console__item_error label {
+  color: #cf2c00;
+}

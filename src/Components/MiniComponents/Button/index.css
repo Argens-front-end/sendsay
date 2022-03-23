@@ -11,7 +11,7 @@
 
   border-radius: 7px;
 
-  transition: 0.2s color ease-in-out;
+  transition: 0.2s color ease;
 
   padding: 5px 10px;
 
@@ -19,6 +19,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.button img {
+  transition: 0.2s filter ease;
 }
 
 img.button__loaded {
@@ -52,9 +56,19 @@ img.button__loaded {
   color: #0055fb;
 }
 
+.button:hover img {
+  filter: invert(17%) sepia(61%) saturate(7075%) hue-rotate(219deg)
+    brightness(103%) contrast(104%);
+}
+
 .button:focus {
   outline: 2px solid rgba(69, 165, 255, 0.5);
   color: #0055fb;
+}
+
+.button:focus img {
+  filter: invert(17%) sepia(61%) saturate(7075%) hue-rotate(219deg)
+    brightness(103%) contrast(104%);
 }
 
 .button:active {
@@ -99,4 +113,10 @@ img.button__loaded {
 
 .button__primary_loading:disabled {
   background-color: #0055fb;
+}
+
+.button__primary_loading:active,
+.button__primary_loading:disabled,
+.button__primary_loading:hover img {
+  filter: none;
 }

@@ -12,7 +12,7 @@ export const errorAuth = (): AppAction => ({
   type: AppActionTypes.APP_ERROR_LOGIN,
 });
 
-export const chechAuth = () => (dispatch: Dispatch<AppAction>) => {
+export const checkAuth = () => (dispatch: Dispatch<AppAction>) => {
   const session = getCookie("sendsay_session");
 
   if (session) {

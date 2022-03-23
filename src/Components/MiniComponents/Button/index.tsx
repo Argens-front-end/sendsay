@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 
 import classNames from "classnames";
+import { Icons } from "../Icons";
 
 interface ButtonProps
   extends React.DetailedHTMLProps<
@@ -43,7 +44,7 @@ export const Button: React.FC<ButtonProps> = ({
       onClick={onClickButton}
     >
       {loading ? (
-        <img alt="loading" src="/icons/loader.svg" className="button__loaded" />
+        <Icons icon="Loader" className="button__loaded" />
       ) : (
         children || text
       )}

@@ -1,14 +1,17 @@
 import React, { useState } from "react";
+import { LINK_GITHUB } from "../../Constants";
 import sendsay from "../../Helpers/sendsay";
 import { useAppDispatch } from "../../Hooks/reduxHooks";
 import { Button } from "../MiniComponents/Button";
+import { Icons } from "../MiniComponents/Icons";
 import { InputGroup } from "../MiniComponents/InputGroup";
+import { Link } from "../MiniComponents/Link";
 
 import "./index.css";
 import { IErrorResLogin, ILoginData, initialLoginData } from "./types";
 
 export const Login: React.FC = () => {
-  const { chechAuth } = useAppDispatch();
+  const { checkAuth } = useAppDispatch();
 
   const [loginData, setLoginsData] = useState<ILoginData>(initialLoginData);
   const [loading, setLoading] = useState(false);
@@ -37,16 +40,16 @@ export const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
-    const errors = [];
+    const errorsSubmit = [];
     if (!loginData.login) {
-      errors.push("login");
+      errorsSubmit.push("login");
     }
     if (!loginData.password) {
-      errors.push("password");
+      errorsSubmit.push("password");
     }
 
-    if (errors.length > 0) {
-      setError(errors);
+    if (errorsSubmit.length > 0) {
+      setError(errorsSubmit);
       setLoading(false);
       return;
     }
@@ -55,7 +58,7 @@ export const Login: React.FC = () => {
       .login(loginData)
       .then(() => {
         document.cookie = "sendsay_session=" + sendsay.session;
-        chechAuth();
+        checkAuth();
       })
       .catch((res: IErrorResLogin) => {
         setErrorRes(res);
@@ -69,11 +72,24 @@ export const Login: React.FC = () => {
     <div className="login">
       <div>
         <div className="login__logo">
-          <img src="/icons/logo.svg" alt="logo" />
+          <Icons icon="Logo" />
         </div>
         <div className="login__form">
           <h2 className="login__title">API-консолька</h2>
-          <div>{errorRes && JSON.stringify(errorRes)}</div>
+
+          {errorRes && (
+            <div className="login__error">
+              <Icons icon="Men" />
+
+              <div className="login__error_descr">
+                <h4>Вход не вышел</h4>
+                <div className="login__error_res">
+                  {JSON.stringify(errorRes, undefined, 2)}
+                </div>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={onSubmitLogin}>
             <InputGroup
               label="Логин"
@@ -110,7 +126,9 @@ export const Login: React.FC = () => {
             />
           </form>
         </div>
-        <div className="login__link">Link</div>
+        <div className="login__link">
+          <Link link={LINK_GITHUB} text="github-link" />
+        </div>
       </div>
     </div>
   );
