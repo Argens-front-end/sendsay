@@ -40,16 +40,16 @@ export const Login: React.FC = () => {
     e.preventDefault();
     setLoading(true);
 
-    const errors = [];
+    const errorsSubmit = [];
     if (!loginData.login) {
-      errors.push("login");
+      errorsSubmit.push("login");
     }
     if (!loginData.password) {
-      errors.push("password");
+      errorsSubmit.push("password");
     }
 
-    if (errors.length > 0) {
-      setError(errors);
+    if (errorsSubmit.length > 0) {
+      setError(errorsSubmit);
       setLoading(false);
       return;
     }
@@ -76,7 +76,20 @@ export const Login: React.FC = () => {
         </div>
         <div className="login__form">
           <h2 className="login__title">API-консолька</h2>
-          <div>{errorRes && JSON.stringify(errorRes)}</div>
+
+          {errorRes && (
+            <div className="login__error">
+              <Icons icon="Men" />
+
+              <div className="login__error_descr">
+                <h4>Вход не вышел</h4>
+                <div className="login__error_res">
+                  {JSON.stringify(errorRes, undefined, 2)}
+                </div>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={onSubmitLogin}>
             <InputGroup
               label="Логин"

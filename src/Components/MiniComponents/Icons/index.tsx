@@ -10,6 +10,7 @@ import Logo from "./logo.svg";
 import Maximize from "./maximize.svg";
 import SmallSize from "./smallsize.svg";
 import DragElement from "./drag-element.svg";
+import Men from "./men.svg";
 
 const icons = {
   AlignRight,
@@ -22,6 +23,7 @@ const icons = {
   Maximize,
   SmallSize,
   DragElement,
+  Men,
 };
 
 type IconsName =
@@ -34,7 +36,8 @@ type IconsName =
   | "Logo"
   | "Maximize"
   | "SmallSize"
-  | "DragElement";
+  | "DragElement"
+  | "Men";
 
 interface IconsProps {
   icon: IconsName;

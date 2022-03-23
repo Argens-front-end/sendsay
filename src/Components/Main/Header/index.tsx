@@ -1,6 +1,7 @@
 import { FC } from "react";
+import sendsay from "../../../Helpers/sendsay";
 import { useFullScreen } from "../../../Hooks";
-import { useAppSelector } from "../../../Hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 import { Button } from "../../MiniComponents/Button";
 import { Icons } from "../../MiniComponents/Icons";
 
@@ -8,6 +9,8 @@ import "./index.css";
 
 export const Header: FC = () => {
   const accountInfo = useAppSelector((state) => state.App.accountInfo);
+
+  const { errorAuth } = useAppDispatch();
 
   const { fullscreen, onCloseFullScreen, onOpenFullScreen } = useFullScreen();
 
@@ -17,6 +20,16 @@ export const Header: FC = () => {
     } else {
       onOpenFullScreen();
     }
+  };
+
+  const onClickLogOut = () => {
+    sendsay
+      .request({
+        action: "logout",
+      })
+      .then(() => {
+        errorAuth();
+      });
   };
 
   return (
@@ -33,7 +46,7 @@ export const Header: FC = () => {
           {accountInfo?.sublogin}
         </div>
         <div className="header_logout-btn">
-          <Button>
+          <Button onClick={onClickLogOut}>
             Выйти <Icons icon="LogOut" />
           </Button>
         </div>
