@@ -1,9 +1,10 @@
 import classNames from "classnames";
 import { FC, useCallback, useMemo, useState } from "react";
-import { CONSOLE_SIZE } from "../../../Constants";
+import { CONSOLE_SIZE, LINK_GITHUB } from "../../../Constants";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
 import { Button } from "../../MiniComponents/Button";
 import { Icons } from "../../MiniComponents/Icons";
+import { Link } from "../../MiniComponents/Link";
 import { ConsoleTextarea } from "./ConsoleTextarea";
 
 import "./index.css";
@@ -122,7 +123,9 @@ export const Console: FC = () => {
             Отправить
           </Button>
         </div>
-        <div className="console__bottom_link">Link</div>
+        <div className="console__bottom_link">
+          <Link link={LINK_GITHUB} text="github-link" />
+        </div>
         <div className="console__bottom_formating">
           <Button onClick={onClickFormating}>
             <Icons icon="AlignRight" alt="icon-formationg" />

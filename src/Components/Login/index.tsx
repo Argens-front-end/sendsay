@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { LINK_GITHUB } from "../../Constants";
 import sendsay from "../../Helpers/sendsay";
 import { useAppDispatch } from "../../Hooks/reduxHooks";
 import { Button } from "../MiniComponents/Button";
 import { Icons } from "../MiniComponents/Icons";
 import { InputGroup } from "../MiniComponents/InputGroup";
+import { Link } from "../MiniComponents/Link";
 
 import "./index.css";
 import { IErrorResLogin, ILoginData, initialLoginData } from "./types";
@@ -111,7 +113,9 @@ export const Login: React.FC = () => {
             />
           </form>
         </div>
-        <div className="login__link">Link</div>
+        <div className="login__link">
+          <Link link={LINK_GITHUB} text="github-link" />
+        </div>
       </div>
     </div>
   );
