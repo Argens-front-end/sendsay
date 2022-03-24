@@ -1,4 +1,4 @@
-import { HISTORY_ITEMS } from "../../Constants";
+import { HISTORY_ITEMS } from "Constants";
 import { ConsoleAction, ConsoleActionTypes, IConsoleState } from "./types";
 
 const initialConsoleState: IConsoleState = {

@@ -1,9 +1,8 @@
 import { FC } from "react";
-import sendsay from "../../../Helpers/sendsay";
-import { useFullScreen } from "../../../Hooks";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
-import { Button } from "../../MiniComponents/Button";
-import { Icons } from "../../MiniComponents/Icons";
+import sendsay from "Helpers/sendsay";
+import { useFullScreen } from "Hooks";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
+import { Button, Icons } from "Components/MiniComponents";
 
 import "./index.css";
 

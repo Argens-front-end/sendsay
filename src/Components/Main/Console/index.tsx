@@ -1,10 +1,8 @@
 import classNames from "classnames";
 import { FC, useCallback, useMemo, useState } from "react";
-import { CONSOLE_SIZE, LINK_GITHUB } from "../../../Constants";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
-import { Button } from "../../MiniComponents/Button";
-import { Icons } from "../../MiniComponents/Icons";
-import { Link } from "../../MiniComponents/Link";
+import { CONSOLE_SIZE, LINK_GITHUB } from "Constants";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
+import { Button, Icons, Link } from "Components/MiniComponents";
 import { ConsoleTextarea } from "./ConsoleTextarea";
 
 import "./index.css";
@@ -59,7 +57,6 @@ export const Console: FC = () => {
   };
 
   const onClicksubmitReq = () => {
-   
     const jsonObj = validatingJSON(reqJSON);
     if (jsonObj && typeof jsonObj.action === "string") {
       return submitRequest(jsonObj);
@@ -115,7 +112,7 @@ export const Console: FC = () => {
       <div className="console__bottom">
         <div>
           <Button
-            variant={"primary"}
+            variant="primary"
             onClick={onClicksubmitReq}
             loading={loadingBtn}
             className="console__bottom_submit"

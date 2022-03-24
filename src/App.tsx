@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { Login } from "./Components/Login";
-import { MainConsole } from "./Components/Main/MainConsole";
-import { useAppDispatch, useAppSelector } from "./Hooks/reduxHooks";
+import { Login } from "Components/Login";
+import { MainConsole } from "Components/Main/MainConsole";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
 
 function App() {
   const { loadingAuth, isAuth } = useAppSelector((state) => state.App);

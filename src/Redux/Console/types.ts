@@ -68,3 +68,7 @@ interface deleteReqHistory {
   type: ConsoleActionTypes.CONSOLE_DELETE_HISTORY_REQ;
   payload: string;
 }
+
+export interface IObjectReq extends Object {
+  action: string;
+}

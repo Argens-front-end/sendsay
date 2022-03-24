@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
 
-import { Button } from "../../MiniComponents/Button";
-import { Icons } from "../../MiniComponents/Icons";
+import { Button, Icons } from "Components/MiniComponents";
 import { HistoryItem } from "./HistoryItem";
 
 import "./index.css";

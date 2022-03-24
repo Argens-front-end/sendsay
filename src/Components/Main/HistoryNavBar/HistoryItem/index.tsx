@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { FC, useCallback, useMemo, useRef, useState } from "react";
-import { useOutside } from "../../../../Helpers";
-import { useAppDispatch } from "../../../../Hooks/reduxHooks";
-import { IObjectReq } from "../../../../Redux/Console/actions";
-import { Icons } from "../../../MiniComponents/Icons";
+import { useOutside } from "Hooks";
+import { useAppDispatch } from "Hooks/reduxHooks";
+import { IObjectReq } from "Redux/Console/types";
+import { Icons } from "Components/MiniComponents";
 
 import "./index.css";
 
@@ -48,7 +48,7 @@ export const HistoryItem: FC<HistoryItemProps> = ({
           )}
           {name}
         </span>
-        <Icons icon={"DragElement"} className="history-nav-bar__menu-icon" />
+        <Icons icon="DragElement" className="history-nav-bar__menu-icon" />
       </div>
       <div
         className={classNames("history-nav-bar__item_drop", {

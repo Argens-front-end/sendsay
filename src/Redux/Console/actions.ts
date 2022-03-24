@@ -1,20 +1,17 @@
 import { Dispatch } from "redux";
-import sendsay from "../../Helpers/sendsay";
+import sendsay from "Helpers/sendsay";
 import {
   ConsoleAction,
   ConsoleActionTypes,
   IActiveRequest,
   IHistoryResponse,
+  IObjectReq,
 } from "./types";
 
 export const onChangeConsoleReq = (value: string): ConsoleAction => ({
   type: ConsoleActionTypes.CONSOLE_ON_CHANGE_REQ,
   payload: value,
 });
-
-export interface IObjectReq extends Object {
-  action: string;
-}
 
 export const submitRequest =
   (jsonObjReq: IObjectReq) => async (dispatch: Dispatch<ConsoleAction>) => {
