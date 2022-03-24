@@ -22,11 +22,7 @@ export const HistoryNavBar: FC = () => {
     <div className="history-nav-bar">
       <div className="history-nav-bar__list">
         {historyRequests.map((item, index) => (
-          <HistoryItem
-            key={index + "HistoryItem"}
-            status={item.status}
-            name={item.name}
-          />
+          <HistoryItem key={index + "HistoryItem"} {...item} />
         ))}
       </div>
       <div>

@@ -13,7 +13,6 @@ export const Console: FC = () => {
   const { onChangeConsoleReq, submitRequest } = useAppDispatch();
 
   const [errorReqJson, setErrorReqJson] = useState(false);
-  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const initialConsoleSize = useMemo(() => {
     const initialSize = localStorage.getItem(CONSOLE_SIZE);
@@ -31,6 +30,8 @@ export const Console: FC = () => {
   const { reqJSON, resJson, status } = useAppSelector(
     (state) => state.Console.activeRequest
   );
+
+  const loadingBtn = useAppSelector((state) => state.Console.loadingFetch);
 
   const onChangeReq: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     if (errorReqJson) {
@@ -58,14 +59,13 @@ export const Console: FC = () => {
   };
 
   const onClicksubmitReq = () => {
-    setLoadingBtn(true);
+   
     const jsonObj = validatingJSON(reqJSON);
     if (jsonObj && typeof jsonObj.action === "string") {
-      return submitRequest(jsonObj, setLoadingBtn);
+      return submitRequest(jsonObj);
     }
 
     setErrorReqJson(true);
-    setLoadingBtn(false);
   };
 
   const onMouseMove = function (e: MouseEvent) {

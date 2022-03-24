@@ -8,6 +8,7 @@ const initialConsoleState: IConsoleState = {
     resJson: "",
     status: true,
   },
+  loadingFetch: false,
 };
 
 export default function ConsoleReducer(
@@ -20,6 +21,16 @@ export default function ConsoleReducer(
         ...state,
         activeRequest: { ...state.activeRequest, reqJSON: action.payload },
       };
+
+    case ConsoleActionTypes.CONSOLE_FETCH_REQ:
+      return {
+        ...state,
+        loadingFetch: true,
+        activeRequest: { ...state.activeRequest, status: true },
+      };
+
+    case ConsoleActionTypes.CONSOLE_ADD_REQ_ACTIVE:
+      return { ...state, activeRequest: action.payload };
 
     case ConsoleActionTypes.CONSOLE_ADD_RESPONSE:
       let historyFilter = state.historyRequests.filter(
@@ -36,9 +47,22 @@ export default function ConsoleReducer(
           status: action.payload.status,
         },
         historyRequests: historyFilter,
+        loadingFetch: false,
       };
 
-    case ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ:
+    case ConsoleActionTypes.CONSOLE_DELETE_HISTORY_REQ:
+      const historyDeleteItem = state.historyRequests.filter(
+        (historyItem) => historyItem.name !== action.payload
+      );
+
+      localStorage.setItem(HISTORY_ITEMS, JSON.stringify(historyDeleteItem));
+
+      return {
+        ...state,
+        historyRequests: historyDeleteItem,
+      };
+
+    case ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ_ALL:
       localStorage.removeItem(HISTORY_ITEMS);
       return { ...state, historyRequests: [] };
 
