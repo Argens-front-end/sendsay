@@ -2,7 +2,7 @@ import React from "react";
 import "./index.css";
 
 import classNames from "classnames";
-import { Icons } from "../Icons";
+import { Icons } from "Components/MiniComponents";
 
 interface ButtonProps
   extends React.DetailedHTMLProps<

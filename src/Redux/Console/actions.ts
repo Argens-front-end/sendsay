@@ -1,22 +1,21 @@
 import { Dispatch } from "redux";
-import sendsay from "../../Helpers/sendsay";
-import { ConsoleAction, ConsoleActionTypes, IHistoryResponse } from "./types";
+import sendsay from "Helpers/sendsay";
+import {
+  ConsoleAction,
+  ConsoleActionTypes,
+  IActiveRequest,
+  IHistoryResponse,
+  IObjectReq,
+} from "./types";
 
 export const onChangeConsoleReq = (value: string): ConsoleAction => ({
   type: ConsoleActionTypes.CONSOLE_ON_CHANGE_REQ,
   payload: value,
 });
 
-interface IObjectReq extends Object {
-  action: string;
-}
-
 export const submitRequest =
-  (
-    jsonObjReq: IObjectReq,
-    setLoading: React.Dispatch<React.SetStateAction<boolean>>
-  ) =>
-  async (dispatch: Dispatch<ConsoleAction>) => {
+  (jsonObjReq: IObjectReq) => async (dispatch: Dispatch<ConsoleAction>) => {
+    dispatch({ type: ConsoleActionTypes.CONSOLE_FETCH_REQ });
     try {
       const resSendSay = await sendsay.request(jsonObjReq);
 
@@ -29,7 +28,6 @@ export const submitRequest =
           name: jsonObjReq.action,
         },
       });
-      setLoading(false);
     } catch (errorRes: any) {
       dispatch({
         type: ConsoleActionTypes.CONSOLE_ADD_RESPONSE,
@@ -40,7 +38,6 @@ export const submitRequest =
           name: jsonObjReq.action,
         },
       });
-      setLoading(false);
     }
   };
 
@@ -52,5 +49,15 @@ export const initHistoryResponse = (
 });
 
 export const clearHistoryResponse = (): ConsoleAction => ({
-  type: ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ,
+  type: ConsoleActionTypes.CONSOLE_CLEAR_HISTORY_REQ_ALL,
+});
+
+export const addReqActive = (reqData: IActiveRequest): ConsoleAction => ({
+  type: ConsoleActionTypes.CONSOLE_ADD_REQ_ACTIVE,
+  payload: reqData,
+});
+
+export const deleteReqHistoryItem = (name: string): ConsoleAction => ({
+  type: ConsoleActionTypes.CONSOLE_DELETE_HISTORY_REQ,
+  payload: name,
 });

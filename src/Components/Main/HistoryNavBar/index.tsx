@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
 
-import { Button } from "../../MiniComponents/Button";
-import { Icons } from "../../MiniComponents/Icons";
+import { Button, Icons } from "Components/MiniComponents";
 import { HistoryItem } from "./HistoryItem";
 
 import "./index.css";
@@ -22,11 +21,7 @@ export const HistoryNavBar: FC = () => {
     <div className="history-nav-bar">
       <div className="history-nav-bar__list">
         {historyRequests.map((item, index) => (
-          <HistoryItem
-            key={index + "HistoryItem"}
-            status={item.status}
-            name={item.name}
-          />
+          <HistoryItem key={index + "HistoryItem"} {...item} />
         ))}
       </div>
       <div>

@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { LINK_GITHUB } from "../../Constants";
-import sendsay from "../../Helpers/sendsay";
-import { useAppDispatch } from "../../Hooks/reduxHooks";
-import { Button } from "../MiniComponents/Button";
-import { Icons } from "../MiniComponents/Icons";
-import { InputGroup } from "../MiniComponents/InputGroup";
-import { Link } from "../MiniComponents/Link";
+import { LINK_GITHUB } from "Constants";
+import sendsay from "Helpers/sendsay";
+import { useAppDispatch } from "Hooks/reduxHooks";
+import { Button, Icons, InputGroup, Link } from "Components/MiniComponents";
 
 import "./index.css";
 import { IErrorResLogin, ILoginData, initialLoginData } from "./types";
@@ -110,7 +107,7 @@ export const Login: React.FC = () => {
 
             <InputGroup
               label="Пароль"
-              type={"password"}
+              type="password"
               autoComplete="off"
               onChange={onChangeLogin}
               value={loginData.password}
@@ -118,10 +115,10 @@ export const Login: React.FC = () => {
               error={errors.includes("password")}
             />
             <Button
-              className={"login__button"}
-              text={"Войти"}
-              variant={"primary"}
-              type={"submit"}
+              className="login__button"
+              text="Войти"
+              variant="primary"
+              type="submit"
               loading={loading}
             />
           </form>

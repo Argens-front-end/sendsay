@@ -1,6 +1,6 @@
 import { FC, useEffect } from "react";
-import { HISTORY_ITEMS } from "../../Constants";
-import { useAppDispatch } from "../../Hooks/reduxHooks";
+import { HISTORY_ITEMS } from "Constants";
+import { useAppDispatch } from "Hooks/reduxHooks";
 import { Console } from "./Console";
 import { Header } from "./Header";
 import { HistoryNavBar } from "./HistoryNavBar";

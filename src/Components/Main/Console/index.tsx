@@ -1,10 +1,8 @@
 import classNames from "classnames";
 import { FC, useCallback, useMemo, useState } from "react";
-import { CONSOLE_SIZE, LINK_GITHUB } from "../../../Constants";
-import { useAppDispatch, useAppSelector } from "../../../Hooks/reduxHooks";
-import { Button } from "../../MiniComponents/Button";
-import { Icons } from "../../MiniComponents/Icons";
-import { Link } from "../../MiniComponents/Link";
+import { CONSOLE_SIZE, LINK_GITHUB } from "Constants";
+import { useAppDispatch, useAppSelector } from "Hooks/reduxHooks";
+import { Button, Icons, Link } from "Components/MiniComponents";
 import { ConsoleTextarea } from "./ConsoleTextarea";
 
 import "./index.css";
@@ -13,7 +11,6 @@ export const Console: FC = () => {
   const { onChangeConsoleReq, submitRequest } = useAppDispatch();
 
   const [errorReqJson, setErrorReqJson] = useState(false);
-  const [loadingBtn, setLoadingBtn] = useState(false);
 
   const initialConsoleSize = useMemo(() => {
     const initialSize = localStorage.getItem(CONSOLE_SIZE);
@@ -31,6 +28,8 @@ export const Console: FC = () => {
   const { reqJSON, resJson, status } = useAppSelector(
     (state) => state.Console.activeRequest
   );
+
+  const loadingBtn = useAppSelector((state) => state.Console.loadingFetch);
 
   const onChangeReq: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     if (errorReqJson) {
@@ -58,14 +57,12 @@ export const Console: FC = () => {
   };
 
   const onClicksubmitReq = () => {
-    setLoadingBtn(true);
     const jsonObj = validatingJSON(reqJSON);
     if (jsonObj && typeof jsonObj.action === "string") {
-      return submitRequest(jsonObj, setLoadingBtn);
+      return submitRequest(jsonObj);
     }
 
     setErrorReqJson(true);
-    setLoadingBtn(false);
   };
 
   const onMouseMove = function (e: MouseEvent) {
@@ -115,7 +112,7 @@ export const Console: FC = () => {
       <div className="console__bottom">
         <div>
           <Button
-            variant={"primary"}
+            variant="primary"
             onClick={onClicksubmitReq}
             loading={loadingBtn}
             className="console__bottom_submit"

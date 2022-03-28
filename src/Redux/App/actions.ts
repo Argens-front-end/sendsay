@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
-import { getCookie } from "../../Helpers";
-import sendsay from "../../Helpers/sendsay";
+import { getCookie } from "Helpers";
+import sendsay from "Helpers/sendsay";
 import { AppAction, AppActionTypes, IAccountInfo } from "./types";
 
 export const successAuth = (accountInfo: IAccountInfo): AppAction => ({
